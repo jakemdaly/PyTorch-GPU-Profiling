@@ -1,0 +1,63 @@
+==15222== NVPROF is profiling process 15222, command: python main.py
+==15222== Warning: Unified Memory Profiling is not supported on the underlying platform. System requirements for unified memory can be found at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#um-requirements
+==15222== Profiling application: python main.py
+==15222== Profiling result:
+"Start","Duration","Grid X","Grid Y","Grid Z","Block X","Block Y","Block Z","Registers Per Thread","Static SMem","Dynamic SMem","Size","Throughput","SrcMemType","DstMemType","Device","Context","Stream","Name","Correlation_ID"
+s,ms,,,,,,,,KB,KB,MB,GB/s,,,,,,,
+10.434375,0.010990,,,,,,,,,,0.000980,0.087116,"Device",,"NVIDIA Tegra X1 (0)","1","7","[CUDA memset]",304
+10.435168,0.002292,,,,,,,,,,0.000004,0.001625,"Pinned","Device","NVIDIA Tegra X1 (0)","1","21","[CUDA memcpy HtoD]",309
+10.435180,0.011614,,,,,,,,,,0.004395,0.369514,"Pinned","Device","NVIDIA Tegra X1 (0)","1","21","[CUDA memcpy HtoD]",317
+10.604400,0.002344,,,,,,,,,,0.000038,0.015893,"Pageable","Device","NVIDIA Tegra X1 (0)","1","21","[CUDA memcpy HtoD]",345
+10.605441,0.005313,,,,,,,,,,0.000038,0.007012,"Device","Pinned","NVIDIA Tegra X1 (0)","1","22","[CUDA memcpy DtoH]",352
+10.645436,0.032396,,,,,,,,,,0.017578,0.529884,"Pinned","Device","NVIDIA Tegra X1 (0)","1","21","[CUDA memcpy HtoD]",359
+10.646763,0.068855,5,1,1,256,1,1,32,4.125000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void tensorflow::functor::SwapDimension1And2InTensor3UsingTiles<unsigned int, int=256, int=32, int=32, bool=0>(unsigned int const *, tensorflow::functor::Dimension<int=3>, tensorflow::functor::SwapDimension1And2InTensor3UsingTiles<unsigned int, int=256, int=32, int=32, bool=0>*)",362
+10.647598,0.042866,1,1,1,1024,1,1,19,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void tensorflow::functor::ShuffleInTensor3Simple<float, int=2, int=1, int=0, bool=0>(int, float const *, tensorflow::functor::Dimension<int=3>, tensorflow::functor::ShuffleInTensor3Simple<float, int=2, int=1, int=0, bool=0>*)",363
+10.662729,0.001823,,,,,,,,,,8.000000,4285.518376,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",364
+10.667808,0.001979,,,,,,,,,,8.000000,3947.700859,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",365
+22.337391,0.009844,,,,,,,,,,0.000122,0.012110,"Device",,"NVIDIA Tegra X1 (0)","1","32","[CUDA memset]",500
+22.337498,0.004427,,,,,,,,,,0.000122,0.026928,"Device",,"NVIDIA Tegra X1 (0)","1","33","[CUDA memset]",502
+22.337584,0.004427,,,,,,,,,,0.000122,0.026928,"Device",,"NVIDIA Tegra X1 (0)","1","34","[CUDA memset]",504
+22.337666,0.004427,,,,,,,,,,0.000122,0.026928,"Device",,"NVIDIA Tegra X1 (0)","1","35","[CUDA memset]",506
+22.339311,0.005990,,,,,,,,,,0.000107,0.017414,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",535
+22.463956,0.016563,4,1,1,256,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)",560
+22.464828,0.383862,1,1,1,8,32,1,99,10.250000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>*, kernel_grad_params, int, int, float, int, int, int)",564
+23.233157,0.009897,,,,,,,,,,0.000008,0.000753,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",577
+23.245755,0.004791,,,,,,,,,,0.000008,0.001555,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",585
+23.246369,43.506636,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",590
+23.289892,43.874144,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",591
+23.333775,0.008958,,,,,,,,,,0.000008,0.000832,"Device","Pageable","NVIDIA Tegra X1 (0)","1","20","[CUDA memcpy DtoH]",595
+23.337601,0.019896,4,1,1,256,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)",604
+23.338755,0.321778,1,1,1,16,32,1,64,32.250000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)",608
+23.339824,0.005156,,,,,,,,,,0.000008,0.001445,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",618
+23.342037,0.004375,,,,,,,,,,0.000008,0.001703,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",626
+23.343247,25.585354,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",631
+23.368845,25.546604,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",632
+23.394419,0.007604,,,,,,,,,,0.000008,0.000980,"Device","Pageable","NVIDIA Tegra X1 (0)","1","20","[CUDA memcpy DtoH]",636
+23.434992,0.000729,,,,,,,,,,8.000000,10716.735254,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",642
+23.436705,0.000781,,,,,,,,,,8.000000,10003.201024,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",643
+23.438423,0.098232,2,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","20","void fft2d_r2c_32x32<float, bool=0, unsigned int=1, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",658
+23.438521,0.096252,2,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","24","void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",661
+23.441128,1.058305,1,1,544,128,1,1,48,5.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","24","void gemv2N_kernel_val<int, int, float2, float2, float2, int=128, int=8, int=4, int=4, int=1, cublasGemvParams<cublasGemvTensorStridedBatched<float2 const >, cublasGemvTensorStridedBatched<float2>, float2>>(float2, float2, float2 const )",664
+23.442184,0.079273,2,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","25","void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",668
+23.442263,0.053074,1,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","24","void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)",666
+23.442357,1.039190,1,1,544,128,1,1,48,5.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","25","void gemv2N_kernel_val<int, int, float2, float2, float2, int=128, int=8, int=4, int=4, int=1, cublasGemvParams<cublasGemvTensorStridedBatched<float2 const >, cublasGemvTensorStridedBatched<float2>, float2>>(float2, float2, float2 const )",671
+23.443393,0.085627,2,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","24","void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",675
+23.443478,0.064532,1,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","25","void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)",673
+23.443484,1.071014,1,1,544,128,1,1,48,5.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","24","void gemv2N_kernel_val<int, int, float2, float2, float2, int=128, int=8, int=4, int=4, int=1, cublasGemvParams<cublasGemvTensorStridedBatched<float2 const >, cublasGemvTensorStridedBatched<float2>, float2>>(float2, float2, float2 const )",678
+23.444553,0.076407,2,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","25","void fft2d_r2c_32x32<float, bool=1, unsigned int=0, bool=0>(float2*, float const *, int, int, int, int, int, int, int, int, int, cudnn::reduced_divisor, bool, int2, int, int)",682
+23.444629,0.062659,1,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","24","void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)",680
+23.444635,1.052368,1,1,544,128,1,1,48,5.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","25","void gemv2N_kernel_val<int, int, float2, float2, float2, int=128, int=8, int=4, int=4, int=1, cublasGemvParams<cublasGemvTensorStridedBatched<float2 const >, cublasGemvTensorStridedBatched<float2>, float2>>(float2, float2, float2 const )",685
+23.445696,0.026718,1,1,1,512,1,1,64,0.000000,35.062500,,,,,"NVIDIA Tegra X1 (0)","1","25","void fft2d_c2r_32x32<float, bool=0, bool=0, unsigned int=0, bool=0, bool=0>(float*, float2 const *, int, int, int, int, int, int, int, int, int, float, float, cudnn::reduced_divisor, bool, float*, float*, int2, int, int)",687
+23.446172,0.001615,,,,,,,,,,0.000008,0.004613,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",712
+23.447233,16.380621,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",717
+23.463630,19.259747,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",718
+23.482898,0.005364,,,,,,,,,,0.000008,0.001389,"Device","Pageable","NVIDIA Tegra X1 (0)","1","20","[CUDA memcpy DtoH]",722
+23.485975,0.002708,,,,,,,,,,0.000008,0.002751,"Device",,"NVIDIA Tegra X1 (0)","1","20","[CUDA memset]",727
+23.488369,17.566741,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",732
+23.505952,21.084059,8192,1,1,1024,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","redzone_checker",733
+23.527039,0.002135,,,,,,,,,,0.000008,0.003490,"Device","Pageable","NVIDIA Tegra X1 (0)","1","20","[CUDA memcpy DtoH]",737
+27.791654,0.001979,,,,,,,,,,0.000107,0.052707,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",857
+28.483143,0.006250,4,1,1,256,1,1,8,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)",878
+28.518994,0.103284,1,1,1,16,32,1,64,32.250000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad2d_alg1_1<float, int=0, int=6, int=7, int=5, int=4, int=5, bool=1, bool=1>*, kernel_grad_params, int, int, float, int, int)",882
+28.630346,0.012917,1,1,1,1024,1,1,15,0.000000,0.000000,,,,,"NVIDIA Tegra X1 (0)","1","20","void tensorflow::BiasNCHWKernel<float>(int, float const *, float const , tensorflow::BiasNCHWKernel<float>*, int, int)",886
+28.648874,0.006614,,,,,,,,,,0.002991,0.441583,"Device","Pinned","NVIDIA Tegra X1 (0)","1","22","[CUDA memcpy DtoH]",891

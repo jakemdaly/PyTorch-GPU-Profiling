@@ -1,0 +1,19 @@
+==23983== NVPROF is profiling process 23983, command: python example.py
+==23983== Warning: Unified Memory Profiling is not supported on the underlying platform. System requirements for unified memory can be found at: http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#um-requirements
+==23983== Profiling application: python example.py
+==23983== Profiling result:
+"Start","Duration","Grid X","Grid Y","Grid Z","Block X","Block Y","Block Z","Registers Per Thread","Static SMem","Dynamic SMem","Size","Throughput","SrcMemType","DstMemType","Device","Context","Stream","Name","Correlation_ID"
+s,ms,,,,,,,,KB,B,MB,MB/s,,,,,,,
+10.791928,0.009895,,,,,,,,,,0.004395,444.116346,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",135
+10.792490,0.002344,,,,,,,,,,0.000004,1.627430,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",145
+10.799925,0.097399,5,1,1,256,1,1,50,0.000000,0,,,,,"NVIDIA Tegra X1 (0)","1","7","_ZN83_GLOBAL__N__59_tmpxft_00000286_00000000_8_Distributions_compute_72_cpp1_ii_c3aa7ee643distribution_elementwise_grid_stride_kernelIfLi4EZZZN2at6native18normal_kernel_cudaERNS1_14TensorIteratorEddPNS1_9GeneratorEENKUlvE_clEvENKUlvE0_clEvEUlP24curandStatePhilox4_32_10E0_ZNS_27distribution_nullary_kernelIffLi4ESB_ZZZNS2_18normal_kernel_cudaES4_ddS6_ENKS7_clEvENKS8_clEvEUlfE_EEvS4_PNS1_13CUDAGeneratorERKT2_T3_EUlifE_EEviSt4pairImmET1_SG_",153
+11.862945,19.741596,,,,,,,,,,17.578125,890.410532,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",164
+18.738578,0.009896,,,,,,,,,,0.000122,12.335318,"Device",,"NVIDIA Tegra X1 (0)","1","22","[CUDA memset]",315
+18.738679,0.004584,,,,,,,,,,0.000122,26.629649,"Device",,"NVIDIA Tegra X1 (0)","1","23","[CUDA memset]",317
+18.738749,0.004479,,,,,,,,,,0.000122,27.253921,"Device",,"NVIDIA Tegra X1 (0)","1","24","[CUDA memset]",319
+18.738806,0.004427,,,,,,,,,,0.000122,27.574048,"Device",,"NVIDIA Tegra X1 (0)","1","25","[CUDA memset]",321
+18.757844,0.005990,,,,,,,,,,0.000107,17.831639,"Pageable","Device","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy HtoD]",350
+18.884148,3.322002,3063,1,1,256,1,1,8,0.000000,0,,,,,"NVIDIA Tegra X1 (0)","1","7","void scalePackedTensor_kernel<float, float>(cudnnTensor4dStruct, float*, float)",372
+18.887491,145.845563,1,1,1000,8,32,1,99,10.250000,0,,,,,"NVIDIA Tegra X1 (0)","1","7","void cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>(int, int, int, float const *, int, float const , int, cudnn::detail::dgrad_engine<float, int=128, int=6, int=8, int=3, int=3, int=5, bool=1>*, kernel_grad_params, int, int, float, int, int, int)",376
+19.033340,0.455427,250,1,1,32,1,4,19,0.000000,0,,,,,"NVIDIA Tegra X1 (0)","1","7","void add_tensor_kernel_v3<int=2, float, float, int=32, int=1, int=4, int=2, int=2>(cudnnTensorStruct, float*, cudnnTensorStruct, float const *, float, float, int, int, int)",381
+19.033813,8.516913,,,,,,,,,,2.990723,351.151016,"Device","Pageable","NVIDIA Tegra X1 (0)","1","7","[CUDA memcpy DtoH]",389
