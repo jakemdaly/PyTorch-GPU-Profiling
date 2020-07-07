@@ -81,16 +81,16 @@ def plot_hist_workload_kernels(layer_dfs):
     fig1000 = go.Figure()
 
     ###### BatchSize=1, Layer1
-    fig1.add_trace(go.Histogram(x=layer_dfs['l1_df'].query('Name==\'%s\''%layer_dfs['names_l1_1'][1]).Duration, name='L1:'+layer_dfs['names_l1_1'][1][:15], marker_color='lightblue'))
-    fig1.add_trace(go.Histogram(x=layer_dfs['l1_df'].query('Name==\'%s\''%layer_dfs['names_l1_1'][2]).Duration, name='L1:'+layer_dfs['names_l1_1'][2][:15], marker_color='blue'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l1_df'].query('Name==\'%s\''%layer_dfs['names_l1_1'][1]).Duration, name='L1: '+layer_dfs['names_l1_1'][1][:15], marker_color='lightblue'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l1_df'].query('Name==\'%s\''%layer_dfs['names_l1_1'][2]).Duration, name='L1: '+layer_dfs['names_l1_1'][2][:15], marker_color='blue'))
 
     # BatchSize=1, Layer2
-    fig1.add_trace(go.Histogram(x=layer_dfs['l2_df'].query('Name==\'%s\''%layer_dfs['names_l2_1'][1]).Duration, name='L2:'+layer_dfs['names_l2_1'][1][:15], marker_color='lightgreen'))
-    fig1.add_trace(go.Histogram(x=layer_dfs['l2_df'].query('Name==\'%s\''%layer_dfs['names_l2_1'][2]).Duration, name='L2:'+layer_dfs['names_l2_1'][2][:15], marker_color='green'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l2_df'].query('Name==\'%s\''%layer_dfs['names_l2_1'][1]).Duration, name='L2: '+layer_dfs['names_l2_1'][1][:15], marker_color='lightgreen'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l2_df'].query('Name==\'%s\''%layer_dfs['names_l2_1'][2]).Duration, name='L2: '+layer_dfs['names_l2_1'][2][:15], marker_color='green'))
 
     # BatchSize=1, Layer3
-    fig1.add_trace(go.Histogram(x=layer_dfs['l3_df'].query('Name==\'%s\''%layer_dfs['names_l3_1'][1]).Duration, name='L3:'+layer_dfs['names_l3_1'][1][:15], marker_color='lightsalmon'))
-    fig1.add_trace(go.Histogram(x=layer_dfs['l3_df'].query('Name==\'%s\''%layer_dfs['names_l3_1'][2]).Duration, name='L3:'+layer_dfs['names_l3_1'][2][:15], marker_color='red'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l3_df'].query('Name==\'%s\''%layer_dfs['names_l3_1'][1]).Duration, name='L3: '+layer_dfs['names_l3_1'][1][:15], marker_color='lightsalmon'))
+    fig1.add_trace(go.Histogram(x=layer_dfs['l3_df'].query('Name==\'%s\''%layer_dfs['names_l3_1'][2]).Duration, name='L3: '+layer_dfs['names_l3_1'][2][:15], marker_color='red'))
 
 
     ###### BatchSize=1000, Layer1
@@ -168,28 +168,12 @@ def fileToFrame(fileName, layer, batchSize, trial):
     thp_units = frame.iloc[0].to_numpy()[12]
     values_arr = frame.iloc[1:].to_numpy()
     if dur_units == 'ms':
-        values_arr[:,1] = values_arr[:,1].astype(float)*1000
-    if dur_units in ('S', 's'):
-#         assert False, "Uh-oh. dur-units = s"
-        values_arr[:,1] = values_arr[:,1].astype(float)*1000000
-    if dur_units == 'ns':
-        values_arr[:,1] = values_arr[:,1].astype(float)/1000
-#         assert False, "Uh-oh. dur-units = ns"
+         values_arr[:,1] = values_arr[:,1].astype(float)*1000
     if thp_units == 'GB/s':
         values_arr[:,12] = values_arr[:,12].astype(float)*1000
-    if thp_units in ('KB/s', 'kB/s'):
-#         assert False, "Uh-oh. thp-units = KB/s"
-        values_arr[:,12] = values_arr[:,12].astype(float)/1000
-    if thp_units in  ('B/s', 'b/s'):
-#         assert False, "Uh-oh. thp-units = B/s"
-        values_arr[:,12] = values_arr[:,12].astype(float)/1000000
-    if mem_units in ('B'):
-#         assert False, "Uh-oh. mem-units = B"
-        values_arr[:,11] = values_arr[:,11].astype(float)/1000
     if mem_units == 'MB':
         values_arr[:,11] = values_arr[:,11].astype(float)*1000
     if mem_units == 'GB':
-#         assert False, "Uh-oh. thp-units = GB/s"
         values_arr[:,11] = values_arr[:,11].astype(float)*1000000
     series = []
     for i in range(np.shape(values_arr)[0]):
@@ -218,9 +202,6 @@ def fileToFrameFLOPS(fileName, layer, batchSize, trial):
 
         for j in range(5,8):
             data = values_arr[i][j]
-            if 'KB/s' in data:
-#                 assert False, "Uh-oh. units"
-                values_arr[i][j] = float(values_arr[i][j][:-4])/1000
             if 'MB/s' in data:
                 values_arr[i][j] = float(values_arr[i][j][:-4])
             if 'GB/s' in data:
@@ -282,25 +263,13 @@ def get_stats(flop_metrics_frame, trace_frame, layers):
     layer_stats_frame = kernel_stats_frame.groupby('Layer').sum()
 
     # Can't just sum up achieved_occupancy and sm_efficiency, so we need to compute weighted average:
-    total_runtimes = dict(layer_stats_frame.kern_runtime_avg)
-    total_runtimes_ = [0]*10 # Ten is arbitrary. Value must be large enough to store a value for every potential layer of a network (eg. MNIST -> 3, but PGAN requires -> 6). 10 is to be safe
-    for layer in total_runtimes:
-        total_runtimes_[layer-1] = total_runtimes[layer]
-
-    #######
-
-    new_sm_eff = [0]*10 # see comment above
-    new_ach_occ = [0]*10
+    total_runtimes = list(layer_stats_frame.kern_runtime_avg)
+    new_sm_eff = [0]*len(layer_stats_frame)
+    new_ach_occ = [0]*len(layer_stats_frame)
     for row in range(len(kernel_stats_frame)):
-#         pdb.set_trace()
-        new_sm_eff[int(kernel_stats_frame.iloc[row]['Layer'])-1] += kernel_stats_frame.iloc[row]['sm_efficiency']*kernel_stats_frame.iloc[row]['kern_runtime_avg']/total_runtimes_[int(kernel_stats_frame.iloc[row]['Layer'])-1]
-        new_ach_occ[int(kernel_stats_frame.iloc[row]['Layer'])-1] += kernel_stats_frame.iloc[row]['achieved_occupancy']*kernel_stats_frame.iloc[row]['kern_runtime_avg']/total_runtimes_[int(kernel_stats_frame.iloc[row]['Layer'])-1]
-        
-    ######
-    
-    new_sm_eff = [i for i in new_sm_eff if i != 0]
-    new_ach_occ = [i for i in new_ach_occ if i != 0]
-#     pdb.set_trace()
+        new_sm_eff[int(kernel_stats_frame.iloc[row]['Layer'])-1] += kernel_stats_frame.iloc[row]['sm_efficiency']*kernel_stats_frame.iloc[row]['kern_runtime_avg']/total_runtimes[int(kernel_stats_frame.iloc[row]['Layer'])-1]
+        new_ach_occ[int(kernel_stats_frame.iloc[row]['Layer'])-1] += kernel_stats_frame.iloc[row]['achieved_occupancy']*kernel_stats_frame.iloc[row]['kern_runtime_avg']/total_runtimes[int(kernel_stats_frame.iloc[row]['Layer'])-1]
+
     layer_stats_frame['achieved_occupancy']=new_ach_occ
     layer_stats_frame['sm_efficiency']=new_sm_eff
     layer_stats_frame['bytes_fetched'] = list(trace_frame.query('(Kernel==\'[CUDA memcpy HtoD]\' or Kernel==\'[CUDA memcpy DtoH]\') and Trial==1').groupby('Layer').sum().Size)
@@ -357,7 +326,7 @@ def fileToFrameLayerDimProf(fileName, layer, batchSize, trial, LayerDepthIn, Lay
 
     return(cleaned_frame)
 
-def fileToFrameLayerDimProfFLOPS(fileName, layer, batchSize, LayerDepthIn, LayerDepthOut, K, dimToBeVaried):
+def fileToFrameLayerDimProfFLOPS(fileName, layer, batchSize, trial, LayerDepthIn, LayerDepthOut, K, dimToBeVaried):
     # valid and working. will override this function with LayerDimensionalityTesting
     #dimToBeVaried = "IN", "OUT", "K"
     
@@ -387,17 +356,17 @@ def fileToFrameLayerDimProfFLOPS(fileName, layer, batchSize, LayerDepthIn, Layer
 
 
 
-#         values = np.append(values_arr[i,:], trial)
-        values = np.append(values_arr[i,:], i)
+        values = np.append(values_arr[i,:], trial)
+        values = np.append(values, i)
         values = np.append(values, batchSize)
         values = np.append(values, layer)
         values = np.append(values, LayerDepthIn)
         values = np.append(values, LayerDepthOut)
         values = np.append(values, K)
         values = np.append(values, dimToBeVaried)
-        series.append((dict(zip(list(frame.columns) + ['MetricCode'] + ['batchSize'] + ['Layer'] + ['LayerDepthIn'] + ['LayerDepthOut'] + ['K'] + ['VariedDimension'], values))))
+        series.append((dict(zip(list(frame.columns) + ['Trial'] + ['MetricCode'] + ['batchSize'] + ['Layer'] + ['LayerDepthIn'] + ['LayerDepthOut'] + ['K'] + ['VariedDimension'], values))))
 
-    cleaned_frame = pd.DataFrame(data=series, columns=list(frame.columns) + ['MetricCode'] + ['batchSize'] + ['Layer'] + ['LayerDepthIn'] + ['LayerDepthOut'] + ['K'] + ['VariedDimension'])
+    cleaned_frame = pd.DataFrame(data=series, columns=list(frame.columns) + ['Trial'] + ['MetricCode'] + ['batchSize'] + ['Layer'] + ['LayerDepthIn'] + ['LayerDepthOut'] + ['K'] + ['VariedDimension'])
 
     cols = cleaned_frame.columns
     cols = cols.map(lambda x: x.replace(' ', '_') if isinstance(x, (str)) else x)
@@ -455,7 +424,7 @@ def get_stats_varyingOutChanDepth(flop_metrics_frame, trace_frame, layers, dout)
 
 def get_stats_varyingK(flop_metrics_frame, trace_frame, layers, dk):
     
-    # dk = list of values that input was varied over
+    # dout = list of values that input was varied over
     
     layerstats_ldp = []
     kernelstats_ldp = []
